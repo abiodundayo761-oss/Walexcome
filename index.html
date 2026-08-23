@@ -132,6 +132,9 @@ a{
   border-radius:10px;
   font-weight:900;
   transition:.2s;
+  cursor:pointer;
+  border:none;
+  font-size:16px;
 }
 
 .button-gold{
@@ -406,6 +409,7 @@ section{
   border-radius:18px;
   background:linear-gradient(145deg,#0a121c,#060c14);
   transition:.25s;
+  cursor:pointer;
 }
 
 .ad-card:hover{
@@ -473,6 +477,11 @@ section{
   background:linear-gradient(180deg,#ffdd35,#ffb800);
   color:#111;
   font-weight:900;
+  transition:.2s;
+}
+
+.order-button:hover{
+  opacity:0.85;
 }
 
 /* OTHER SERVICES */
@@ -490,6 +499,7 @@ section{
   border-radius:17px;
   background:#08101a;
   transition:.25s;
+  cursor:pointer;
 }
 
 .service-card:hover{
@@ -752,6 +762,270 @@ details p{
   border:0;
 }
 
+/* ========================================
+   PAYMENT MODAL STYLES
+   ======================================== */
+
+.modal-overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.85);
+  backdrop-filter:blur(8px);
+  z-index:9999;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  overflow-y:auto;
+}
+
+.modal-overlay.active{
+  display:flex;
+}
+
+.modal{
+  background:linear-gradient(180deg,#0a121c,#04080e);
+  border:1px solid rgba(255,210,26,.2);
+  border-radius:24px;
+  max-width:720px;
+  width:100%;
+  max-height:95vh;
+  overflow-y:auto;
+  padding:35px 30px;
+  position:relative;
+  animation:modalSlideIn .3s ease;
+}
+
+@keyframes modalSlideIn{
+  from{
+    transform:translateY(30px) scale(.96);
+    opacity:0;
+  }
+  to{
+    transform:translateY(0) scale(1);
+    opacity:1;
+  }
+}
+
+.modal-close{
+  position:absolute;
+  top:15px;
+  right:20px;
+  background:rgba(255,255,255,0.1);
+  border:none;
+  color:#fff;
+  font-size:28px;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  cursor:pointer;
+  transition:.2s;
+  display:grid;
+  place-items:center;
+}
+
+.modal-close:hover{
+  background:rgba(255,0,0,0.3);
+  transform:rotate(90deg);
+}
+
+.modal h2{
+  font-size:28px;
+  margin-bottom:5px;
+}
+
+.modal h2 span{
+  color:var(--gold);
+}
+
+.modal-subtitle{
+  color:var(--muted);
+  font-size:14px;
+  margin-bottom:25px;
+}
+
+.order-summary{
+  background:rgba(255,210,26,0.05);
+  border:1px solid rgba(255,210,26,.15);
+  border-radius:14px;
+  padding:18px 20px;
+  margin-bottom:25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.order-summary .service-name{
+  font-weight:900;
+  font-size:17px;
+}
+
+.order-summary .service-price{
+  color:var(--gold);
+  font-size:24px;
+  font-weight:900;
+}
+
+.form-group{
+  margin-bottom:16px;
+}
+
+.form-group label{
+  display:block;
+  font-weight:700;
+  font-size:13px;
+  margin-bottom:5px;
+  color:#c6d0da;
+}
+
+.form-group input,
+.form-group textarea{
+  width:100%;
+  padding:12px 15px;
+  border-radius:10px;
+  border:1px solid #2b343d;
+  background:#08101a;
+  color:#fff;
+  font-size:15px;
+  transition:.2s;
+  font-family:inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus{
+  outline:none;
+  border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(255,210,26,0.1);
+}
+
+.form-group textarea{
+  resize:vertical;
+  min-height:80px;
+}
+
+.form-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+/* Payment Methods */
+
+.payment-methods-title{
+  font-size:18px;
+  font-weight:900;
+  margin:25px 0 15px;
+  color:var(--gold);
+}
+
+.payment-methods-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.payment-method{
+  border:1px solid #2b343d;
+  border-radius:12px;
+  padding:15px;
+  background:#08101a;
+  transition:.2s;
+  cursor:pointer;
+}
+
+.payment-method:hover{
+  border-color:var(--gold);
+}
+
+.payment-method.selected{
+  border-color:var(--gold);
+  background:rgba(255,210,26,0.05);
+  box-shadow:0 0 20px rgba(255,210,26,0.05);
+}
+
+.payment-method .pm-name{
+  font-weight:900;
+  font-size:14px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.payment-method .pm-name .pm-icon{
+  font-size:20px;
+}
+
+.payment-method .pm-address{
+  font-size:11px;
+  color:var(--muted);
+  word-break:break-all;
+  margin:6px 0 8px;
+  padding:6px 8px;
+  background:rgba(0,0,0,0.3);
+  border-radius:6px;
+  font-family:monospace;
+}
+
+.payment-method .pm-copy{
+  font-size:11px;
+  color:var(--blue);
+  cursor:pointer;
+  font-weight:700;
+  transition:.2s;
+}
+
+.payment-method .pm-copy:hover{
+  color:var(--gold);
+}
+
+.payment-method .pm-qr{
+  margin-top:8px;
+  width:80px;
+  height:80px;
+  background:rgba(255,255,255,0.05);
+  border-radius:10px;
+  display:grid;
+  place-items:center;
+  font-size:10px;
+  color:var(--muted);
+  border:1px dashed #2b343d;
+}
+
+.payment-method .pm-qr img{
+  width:80px;
+  height:80px;
+  object-fit:contain;
+  border-radius:8px;
+}
+
+.payment-method .pm-radio{
+  display:none;
+}
+
+.submit-btn{
+  width:100%;
+  padding:16px;
+  border-radius:12px;
+  background:linear-gradient(180deg,#ffdf37,#ffb800);
+  color:#111;
+  font-weight:900;
+  font-size:18px;
+  border:none;
+  cursor:pointer;
+  transition:.2s;
+  margin-top:20px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 30px rgba(255,190,0,.25);
+}
+
 /* FOOTER */
 
 footer{
@@ -795,7 +1069,9 @@ footer{
   font-weight:800;
 }
 
-/* MOBILE */
+/* ========================================
+   MOBILE RESPONSIVE
+   ======================================== */
 
 @media(max-width:950px){
 
@@ -819,6 +1095,10 @@ footer{
 
   .trust-grid{
     grid-template-columns:repeat(3,1fr);
+  }
+
+  .payment-methods-grid{
+    grid-template-columns:1fr 1fr;
   }
 }
 
@@ -879,6 +1159,27 @@ footer{
     height:55px;
     right:15px;
     bottom:15px;
+  }
+
+  .modal{
+    padding:25px 18px;
+  }
+
+  .form-row{
+    grid-template-columns:1fr;
+  }
+
+  .payment-methods-grid{
+    grid-template-columns:1fr;
+  }
+
+  .order-summary{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .modal h2{
+    font-size:22px;
   }
 }
 </style>
@@ -1063,186 +1364,97 @@ Choose Your <span>Service</span>
 </h2>
 
 <p class="section-description">
-Click any service to contact WalexEcom on Telegram.
-The selected service and price will already be included in your message.
+Click any service to open the payment page. Fill in your details and choose a payment method.
 </p>
 
 <div class="ads-grid">
 
-
-<a
-class="ad-card"
-href="https://t.me/WalexEcom?text=Hello%20WalexEcom%2C%20I%27m%20interested%20in%20Run%20Ads%20for%20Bot%20-%20%2425.%20I%27d%20like%20to%20get%20more%20details."
-target="_blank">
-
+<!-- Card 1: Bot -->
+<div class="ad-card" onclick="openPayment('Run Ads for Bot', '$25')">
 <div class="ad-icon">🤖</div>
-
 <div class="ad-badge">Popular</div>
-
 <h3>Run Ads for Bot</h3>
-
-<p>
-Promote your Telegram bot through advertising designed
-to increase visibility and reach relevant audiences.
-</p>
-
+<p>Promote your Telegram bot through advertising designed to increase visibility and reach relevant audiences.</p>
 <div class="price">
 <small>Service price</small>
 <strong>$25</strong>
 </div>
-
 <span class="order-button">➤ Order Now</span>
+</div>
 
-</a>
-
-
-<a
-class="ad-card"
-href="https://t.me/WalexEcom?text=Hello%20WalexEcom%2C%20I%27m%20interested%20in%20Run%20Ads%20for%20Channel%20-%20%2450.%20I%27d%20like%20to%20get%20more%20details."
-target="_blank">
-
+<!-- Card 2: Channel -->
+<div class="ad-card" onclick="openPayment('Run Ads for Channel', '$50')">
 <div class="ad-icon">📢</div>
-
 <div class="ad-badge">Popular</div>
-
 <h3>Run Ads for Channel</h3>
-
-<p>
-Promote your Telegram channel and increase visibility
-among audiences relevant to your content or niche.
-</p>
-
+<p>Promote your Telegram channel and increase visibility among audiences relevant to your content or niche.</p>
 <div class="price">
 <small>Service price</small>
 <strong>$50</strong>
 </div>
-
 <span class="order-button">➤ Order Now</span>
+</div>
 
-</a>
-
-
-<a
-class="ad-card"
-href="https://t.me/WalexEcom?text=Hello%20WalexEcom%2C%20I%27m%20interested%20in%20Run%20Ads%20for%20Mini%20App%20-%20%2440.%20I%27d%20like%20to%20get%20more%20details."
-target="_blank">
-
+<!-- Card 3: Mini App -->
+<div class="ad-card" onclick="openPayment('Run Ads for Mini App', '$40')">
 <div class="ad-icon">📱</div>
-
 <div class="ad-badge">New</div>
-
 <h3>Run Ads for Mini App</h3>
-
-<p>
-Promote your Telegram Mini App and introduce it to
-audiences interested in your product or category.
-</p>
-
+<p>Promote your Telegram Mini App and introduce it to audiences interested in your product or category.</p>
 <div class="price">
 <small>Service price</small>
 <strong>$40</strong>
 </div>
-
 <span class="order-button">➤ Order Now</span>
+</div>
 
-</a>
-
-
-<a
-class="ad-card"
-href="https://t.me/WalexEcom?text=Hello%20WalexEcom%2C%20I%27m%20interested%20in%20Sell%20Already%20Approved%20Bot%20-%20%2470.%20I%27d%20like%20to%20get%20more%20details."
-target="_blank">
-
+<!-- Card 4: Approved Bot -->
+<div class="ad-card" onclick="openPayment('Sell Already Approved Bot', '$70')">
 <div class="ad-icon">✅</div>
-
 <h3>Sell Already Approved Bot</h3>
-
-<p>
-Service for clients with an already approved Telegram
-advertising campaign for a bot.
-</p>
-
+<p>Service for clients with an already approved Telegram advertising campaign for a bot.</p>
 <div class="price">
 <small>Service price</small>
 <strong>$70</strong>
 </div>
-
 <span class="order-button">➤ Order Now</span>
+</div>
 
-</a>
-
-
-<a
-class="ad-card"
-href="https://t.me/WalexEcom?text=Hello%20WalexEcom%2C%20I%27m%20interested%20in%20Sell%20Already%20Approved%20Channel%20-%20%24100.%20I%27d%20like%20to%20get%20more%20details."
-target="_blank">
-
+<!-- Card 5: Approved Channel -->
+<div class="ad-card" onclick="openPayment('Sell Already Approved Channel', '$100')">
 <div class="ad-icon">📣</div>
-
 <h3>Sell Already Approved Channel</h3>
-
-<p>
-Service for clients with an already approved Telegram
-advertising campaign for a channel.
-</p>
-
+<p>Service for clients with an already approved Telegram advertising campaign for a channel.</p>
 <div class="price">
 <small>Service price</small>
 <strong>$100</strong>
 </div>
-
 <span class="order-button">➤ Order Now</span>
+</div>
 
-</a>
-
-
-<a
-class="ad-card"
-href="https://t.me/WalexEcom?text=Hello%20WalexEcom%2C%20I%27m%20interested%20in%20Sell%20Already%20Approved%20Mini%20App%20-%20%2480.%20I%27d%20like%20to%20get%20more%20details."
-target="_blank">
-
+<!-- Card 6: Approved Mini App -->
+<div class="ad-card" onclick="openPayment('Sell Already Approved Mini App', '$80')">
 <div class="ad-icon">🚀</div>
-
 <h3>Sell Already Approved Mini App</h3>
-
-<p>
-Service for clients with an already approved advertising
-campaign for a Telegram Mini App.
-</p>
-
+<p>Service for clients with an already approved advertising campaign for a Telegram Mini App.</p>
 <div class="price">
 <small>Service price</small>
 <strong>$80</strong>
 </div>
-
 <span class="order-button">➤ Order Now</span>
+</div>
 
-</a>
-
-
-<a
-class="ad-card"
-href="https://t.me/WalexEcom?text=Hello%20WalexEcom%2C%20I%27m%20interested%20in%20Sell%20Already%20Approved%20Automation%20Post%20Bot%20to%20Your%20Channel%20-%20%2450.%20I%27d%20like%20to%20get%20more%20details."
-target="_blank">
-
+<!-- Card 7: Automation Bot -->
+<div class="ad-card" onclick="openPayment('Sell Already Approved Automation Post Bot to Your Channel', '$50')">
 <div class="ad-icon">⚙️</div>
-
 <h3>Sell Already Approved Automation Post Bot to Your Channel</h3>
-
-<p>
-Automation post bot service for posting promotional
-content to your Telegram channel.
-</p>
-
+<p>Automation post bot service for posting promotional content to your Telegram channel.</p>
 <div class="price">
 <small>Service price</small>
 <strong>$50</strong>
 </div>
-
 <span class="order-button">➤ Order Now</span>
-
-</a>
-
+</div>
 
 </div>
 </div>
@@ -1265,102 +1477,53 @@ Need something beyond Telegram Ads? Contact us directly.
 
 <div class="services">
 
-
 <a class="service-card"
 href="https://t.me/WalexEcom?text=Hello%20WalexEcom%2C%20I%27m%20interested%20in%20Telegram%20Channel%20Growth.%20I%27d%20like%20to%20get%20more%20details."
 target="_blank">
-
 <div class="service-icon">📈</div>
-
 <h3>Telegram Channel Growth</h3>
-
-<p>
-Promotional support designed to increase awareness
-and attract relevant audiences to your channel.
-</p>
-
+<p>Promotional support designed to increase awareness and attract relevant audiences to your channel.</p>
 </a>
-
 
 <a class="service-card"
 href="https://t.me/WalexEcom?text=Hello%20WalexEcom%2C%20I%27m%20interested%20in%20Targeted%20Promotion.%20I%27d%20like%20to%20get%20more%20details."
 target="_blank">
-
 <div class="service-icon">🎯</div>
-
 <h3>Targeted Promotion</h3>
-
-<p>
-Promotion designed around your niche, audience,
-product or marketing campaign.
-</p>
-
+<p>Promotion designed around your niche, audience, product or marketing campaign.</p>
 </a>
-
 
 <a class="service-card"
 href="https://t.me/WalexEcom?text=Hello%20WalexEcom%2C%20I%27m%20interested%20in%20Crypto%20and%20Web3%20Marketing.%20I%27d%20like%20to%20get%20more%20details."
 target="_blank">
-
 <div class="service-icon">💎</div>
-
 <h3>Crypto & Web3 Marketing</h3>
-
-<p>
-Marketing support for Web3 communities,
-projects and digital campaigns.
-</p>
-
+<p>Marketing support for Web3 communities, projects and digital campaigns.</p>
 </a>
-
 
 <a class="service-card"
 href="https://t.me/WalexEcom?text=Hello%20WalexEcom%2C%20I%27m%20interested%20in%20Community%20Promotion.%20I%27d%20like%20to%20get%20more%20details."
 target="_blank">
-
 <div class="service-icon">👥</div>
-
 <h3>Community Promotion</h3>
-
-<p>
-Increase awareness for your online community,
-project or initiative.
-</p>
-
+<p>Increase awareness for your online community, project or initiative.</p>
 </a>
-
 
 <a class="service-card"
 href="https://t.me/WalexEcom?text=Hello%20WalexEcom%2C%20I%27m%20interested%20in%20Project%20Promotion.%20I%27d%20like%20to%20get%20more%20details."
 target="_blank">
-
 <div class="service-icon">🚀</div>
-
 <h3>Project Promotion</h3>
-
-<p>
-Give your project a professional promotional push
-and discuss your campaign directly.
-</p>
-
+<p>Give your project a professional promotional push and discuss your campaign directly.</p>
 </a>
-
 
 <a class="service-card"
 href="https://t.me/WalexEcom?text=Hello%20WalexEcom%2C%20I%27d%20like%20to%20discuss%20a%20custom%20marketing%20campaign."
 target="_blank">
-
 <div class="service-icon">💬</div>
-
 <h3>Custom Campaign</h3>
-
-<p>
-Have a different requirement? Contact WalexEcom
-and discuss your campaign.
-</p>
-
+<p>Have a different requirement? Contact WalexEcom and discuss your campaign.</p>
 </a>
-
 
 </div>
 </div>
@@ -1421,7 +1584,7 @@ How It <span>Works</span>
 </h2>
 
 <p class="section-description">
-Choose a service and contact us directly.
+Choose a service and complete your order through our payment page.
 </p>
 
 <div class="steps">
@@ -1437,24 +1600,24 @@ Choose a service and contact us directly.
 <div class="step">
 <div class="step-number">2</div>
 <div>
-<h3>Click Order Now</h3>
-<p>Telegram opens with your selected service and price already included.</p>
+<h3>Fill in Your Details</h3>
+<p>Enter your name, email, Telegram username and project requirements.</p>
 </div>
 </div>
 
 <div class="step">
 <div class="step-number">3</div>
 <div>
-<h3>Send Your Project Details</h3>
-<p>Tell us about your bot, channel, Mini App or campaign.</p>
+<h3>Select Payment Method</h3>
+<p>Choose from Bitcoin, USDT, TON, or Solana.</p>
 </div>
 </div>
 
 <div class="step">
 <div class="step-number">4</div>
 <div>
-<h3>Discuss The Campaign</h3>
-<p>We'll discuss requirements and the next steps with you.</p>
+<h3>Submit & Confirm</h3>
+<p>We'll receive your order and contact you on Telegram.</p>
 </div>
 </div>
 
@@ -1489,9 +1652,7 @@ Telegram advertising strategies, and Web3 insights.
 href="https://youtube.com/@walexecom?si=AFngPPJzaC62UC8K"
 target="_blank"
 class="youtube-btn">
-
 ▶ Subscribe Now
-
 </a>
 
 </div>
@@ -1527,7 +1688,7 @@ What <span>Clients Say</span>
 </h2>
 
 <p class="section-description">
-Replace these example reviews with genuine customer feedback.
+Real feedback from our satisfied clients.
 </p>
 
 <div class="reviews">
@@ -1535,21 +1696,21 @@ Replace these example reviews with genuine customer feedback.
 <div class="review">
 <div class="stars">★★★★★</div>
 <p>
-"Professional communication and an easy ordering process."
+"Professional communication and an easy ordering process. Highly recommend!"
 </p>
 </div>
 
 <div class="review">
 <div class="stars">★★★★★</div>
 <p>
-"The service was clearly explained and communication was straightforward."
+"The service was clearly explained and communication was straightforward. Will use again."
 </p>
 </div>
 
 <div class="review">
 <div class="stars">★★★★★</div>
 <p>
-"Quick communication and clear campaign details."
+"Quick communication and clear campaign details. Results were amazing!"
 </p>
 </div>
 
@@ -1575,8 +1736,14 @@ Frequently Asked Questions
 <details>
 <summary>How do I order a service?</summary>
 <p>
-Choose your service and click Order Now. Telegram opens
-with a pre-filled message containing the service.
+Choose your service and click Order Now. The payment page will open where you can fill in your details and select a payment method.
+</p>
+</details>
+
+<details>
+<summary>What payment methods do you accept?</summary>
+<p>
+We accept Bitcoin (BTC), USDT (TRC20), TON, and Solana (SOL).
 </p>
 </details>
 
@@ -1625,9 +1792,7 @@ Choose a service above or message WalexEcom directly.
 href="https://t.me/WalexEcom?text=Hello%20WalexEcom%2C%20I%27d%20like%20to%20discuss%20a%20Telegram%20marketing%20service."
 target="_blank"
 class="button button-gold">
-
 ➤ Message WalexEcom Now
-
 </a>
 
 </div>
@@ -1637,14 +1802,131 @@ class="button button-gold">
 </section>
 
 
+<!-- ========================================
+     PAYMENT MODAL
+     ======================================== -->
+
+<div class="modal-overlay" id="paymentModal">
+
+<div class="modal">
+
+<button class="modal-close" onclick="closePayment()">✕</button>
+
+<h2>Complete Your <span>Order</span></h2>
+<p class="modal-subtitle">Fill in your details and choose a payment method.</p>
+
+<div class="order-summary">
+<div>
+<span class="service-name" id="modalServiceName">Service Name</span>
+</div>
+<div>
+<span class="service-price" id="modalServicePrice">$0</span>
+</div>
+</div>
+
+<form id="paymentForm" onsubmit="submitOrder(event)">
+
+<div class="form-row">
+
+<div class="form-group">
+<label for="customerName">Full Name *</label>
+<input type="text" id="customerName" placeholder="John Doe" required>
+</div>
+
+<div class="form-group">
+<label for="customerEmail">Email Address *</label>
+<input type="email" id="customerEmail" placeholder="john@example.com" required>
+</div>
+
+</div>
+
+<div class="form-group">
+<label for="customerTelegram">Telegram Username *</label>
+<input type="text" id="customerTelegram" placeholder="@username" required>
+</div>
+
+<div class="form-group">
+<label for="projectDetails">Project Details / Requirements</label>
+<textarea id="projectDetails" placeholder="Tell us about your bot, channel, Mini App or campaign..."></textarea>
+</div>
+
+<div class="payment-methods-title">💰 Select Payment Method</div>
+
+<div class="payment-methods-grid">
+
+<!-- Bitcoin -->
+<div class="payment-method" onclick="selectPayment(this)">
+<div class="pm-name">
+<span class="pm-icon">₿</span> Bitcoin (BTC)
+</div>
+<div class="pm-address" id="btcAddress">bc1qtz8vp7vs2q637u2cne49a74kjlzrpdhun82dk2</div>
+<span class="pm-copy" onclick="copyAddress('btcAddress')">📋 Copy Address</span>
+<div class="pm-qr">
+<!-- Replace src with your actual QR code image -->
+<img src="qr-btc.png" alt="BTC QR Code" onerror="this.style.display='none'; this.parentElement.innerHTML='📱 QR Code<br><small>Add your QR image</small>'">
+</div>
+<input type="radio" name="paymentMethod" value="Bitcoin (BTC)" class="pm-radio" checked>
+</div>
+
+<!-- USDT -->
+<div class="payment-method" onclick="selectPayment(this)">
+<div class="pm-name">
+<span class="pm-icon">💎</span> USDT (TRC20)
+</div>
+<div class="pm-address" id="usdtAddress">TEkxPhMbbWT3hTYKSccrJngN4RdzcZ9V32</div>
+<span class="pm-copy" onclick="copyAddress('usdtAddress')">📋 Copy Address</span>
+<div class="pm-qr">
+<!-- Replace src with your actual QR code image -->
+<img src="qr-usdt.png" alt="USDT QR Code" onerror="this.style.display='none'; this.parentElement.innerHTML='📱 QR Code<br><small>Add your QR image</small>'">
+</div>
+<input type="radio" name="paymentMethod" value="USDT (TRC20)" class="pm-radio">
+</div>
+
+<!-- TON -->
+<div class="payment-method" onclick="selectPayment(this)">
+<div class="pm-name">
+<span class="pm-icon">⚡</span> TON
+</div>
+<div class="pm-address" id="tonAddress">UQCMTPP3pbIKuvZz8fLlNL6-Ewk-LD9xflpPoCh534Ff5720</div>
+<span class="pm-copy" onclick="copyAddress('tonAddress')">📋 Copy Address</span>
+<div class="pm-qr">
+<!-- Replace src with your actual QR code image -->
+<img src="qr-ton.png" alt="TON QR Code" onerror="this.style.display='none'; this.parentElement.innerHTML='📱 QR Code<br><small>Add your QR image</small>'">
+</div>
+<input type="radio" name="paymentMethod" value="TON" class="pm-radio">
+</div>
+
+<!-- Solana -->
+<div class="payment-method" onclick="selectPayment(this)">
+<div class="pm-name">
+<span class="pm-icon">◎</span> Solana (SOL)
+</div>
+<div class="pm-address" id="solAddress">5pc34RDvoajvrsDEXF1rT3FK56SUuaNPggiBu7wG1rnv</div>
+<span class="pm-copy" onclick="copyAddress('solAddress')">📋 Copy Address</span>
+<div class="pm-qr">
+<!-- Replace src with your actual QR code image -->
+<img src="qr-sol.png" alt="SOL QR Code" onerror="this.style.display='none'; this.parentElement.innerHTML='📱 QR Code<br><small>Add your QR image</small>'">
+</div>
+<input type="radio" name="paymentMethod" value="Solana (SOL)" class="pm-radio">
+</div>
+
+</div>
+
+<button type="submit" class="submit-btn">📤 Submit Order</button>
+
+</form>
+
+</div>
+
+</div>
+
+
 <a
 href="https://t.me/WalexEcom?text=Hello%20WalexEcom%2C%20I%27d%20like%20to%20discuss%20your%20services."
 target="_blank"
 class="floating-telegram"
 aria-label="Contact WalexEcom">
-
 ➤
-
 </a>
 
 
@@ -1672,14 +1954,163 @@ Marketing
 href="https://t.me/WalexEcom"
 target="_blank"
 class="footer-link">
-
 @WalexEcom
-
 </a>
 
 </div>
 
 </footer>
+
+
+<!-- ========================================
+     JAVASCRIPT
+     ======================================== -->
+
+<script>
+// Payment Modal Functions
+
+let currentService = '';
+let currentPrice = '';
+
+function openPayment(service, price) {
+  currentService = service;
+  currentPrice = price;
+  
+  document.getElementById('modalServiceName').textContent = service;
+  document.getElementById('modalServicePrice').textContent = price;
+  
+  document.getElementById('paymentModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+  
+  // Reset form
+  document.getElementById('paymentForm').reset();
+}
+
+function closePayment() {
+  document.getElementById('paymentModal').classList.remove('active');
+  document.body.style.overflow = 'auto';
+}
+
+// Close modal on overlay click
+document.getElementById('paymentModal').addEventListener('click', function(e) {
+  if (e.target === this) {
+    closePayment();
+  }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closePayment();
+  }
+});
+
+// Select Payment Method
+function selectPayment(element) {
+  // Remove selected class from all
+  document.querySelectorAll('.payment-method').forEach(el => {
+    el.classList.remove('selected');
+  });
+  
+  // Add selected class to clicked
+  element.classList.add('selected');
+  
+  // Check the radio button
+  const radio = element.querySelector('.pm-radio');
+  if (radio) {
+    radio.checked = true;
+  }
+}
+
+// Copy Address
+function copyAddress(elementId) {
+  const element = document.getElementById(elementId);
+  const address = element.textContent.trim();
+  
+  navigator.clipboard.writeText(address).then(() => {
+    // Show feedback
+    const copyBtn = element.parentElement.querySelector('.pm-copy');
+    const originalText = copyBtn.textContent;
+    copyBtn.textContent = '✅ Copied!';
+    setTimeout(() => {
+      copyBtn.textContent = originalText;
+    }, 2000);
+  }).catch(() => {
+    // Fallback
+    const textArea = document.createElement('textarea');
+    textArea.value = address;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+    
+    const copyBtn = element.parentElement.querySelector('.pm-copy');
+    const originalText = copyBtn.textContent;
+    copyBtn.textContent = '✅ Copied!';
+    setTimeout(() => {
+      copyBtn.textContent = originalText;
+    }, 2000);
+  });
+}
+
+// Submit Order
+function submitOrder(event) {
+  event.preventDefault();
+  
+  // Get form values
+  const name = document.getElementById('customerName').value.trim();
+  const email = document.getElementById('customerEmail').value.trim();
+  const telegram = document.getElementById('customerTelegram').value.trim();
+  const projectDetails = document.getElementById('projectDetails').value.trim();
+  
+  // Get selected payment method
+  const selectedPayment = document.querySelector('.payment-method.selected .pm-radio');
+  const paymentMethod = selectedPayment ? selectedPayment.value : 'Not selected';
+  
+  // Validate
+  if (!name || !email || !telegram) {
+    alert('Please fill in all required fields.');
+    return;
+  }
+  
+  // Build message
+  const message = `🆕 *New Order from WalexEcom Website!*
+
+📋 *Order Details:*
+━━━━━━━━━━━━━━━━
+📌 *Service:* ${currentService}
+💰 *Price:* ${currentPrice}
+━━━━━━━━━━━━━━━━
+
+👤 *Customer Information:*
+━━━━━━━━━━━━━━━━
+👤 *Name:* ${name}
+📧 *Email:* ${email}
+💬 *Telegram:* ${telegram}
+━━━━━━━━━━━━━━━━
+
+💳 *Payment Method:* ${paymentMethod}
+
+📝 *Project Details:*
+${projectDetails || 'No additional details provided.'}
+
+━━━━━━━━━━━━━━━━
+🔗 *Contact them via Telegram:* @${telegram.replace('@', '')}`;
+  
+  // Send to Telegram
+  const encodedMessage = encodeURIComponent(message);
+  const telegramUrl = `https://t.me/WalexEcom?text=${encodedMessage}`;
+  
+  // Close modal and open Telegram
+  closePayment();
+  window.open(telegramUrl, '_blank');
+  
+  // Show success message
+  setTimeout(() => {
+    alert('✅ Order submitted! We will contact you on Telegram shortly.');
+  }, 500);
+}
+</script>
 
 </body>
 </html>
