@@ -1094,6 +1094,18 @@ details p{
   transform:none;
 }
 
+/* Payment Method Required Warning */
+.payment-warning{
+  color:#ff6b6b;
+  font-size:13px;
+  margin-top:8px;
+  display:none;
+}
+
+.payment-warning.show{
+  display:block;
+}
+
 /* Upload Required Warning */
 .upload-warning{
   color:#ff6b6b;
@@ -1952,7 +1964,7 @@ class="button button-gold">
 <textarea id="projectDetails" placeholder="Tell us about your bot, channel, Mini App or campaign..."></textarea>
 </div>
 
-<div class="payment-methods-title">💰 Select Payment Method</div>
+<div class="payment-methods-title">💰 Select Payment Method *</div>
 
 <div class="payment-methods-grid">
 
@@ -1967,7 +1979,7 @@ class="button button-gold">
 <!-- Replace src with your actual QR code image -->
 <img src="qr-btc.png" alt="BTC QR Code" onerror="this.style.display='none'; this.parentElement.innerHTML='📱 QR Code<br><small>Add your QR image</small>'">
 </div>
-<input type="radio" name="paymentMethod" value="Bitcoin (BTC)" class="pm-radio" checked>
+<input type="radio" name="paymentMethod" value="Bitcoin (BTC)" class="pm-radio">
 </div>
 
 <!-- USDT -->
@@ -2013,6 +2025,8 @@ class="button button-gold">
 </div>
 
 </div>
+
+<div class="payment-warning" id="paymentWarning">⚠️ Please select a payment method.</div>
 
 <!-- FILE UPLOAD -->
 <div class="form-group" style="margin-top:20px;">
@@ -2080,7 +2094,19 @@ class="footer-link">
      JAVASCRIPT
      ======================================== -->
 
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
 <script>
+// EmailJS Configuration
+const EMAILJS_PUBLIC_KEY = 'DYFxYul-k5mUo9x9VoI7k';
+const EMAILJS_SERVICE_ID = 'service_lv0ipk7';
+const EMAILJS_TEMPLATE_ID = 'template_k4z0p2p';
+
+// Initialize EmailJS
+(function() {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+})();
+
 // ImgBB API Key
 const IMGBB_API_KEY = '03544e7193c78616e6bfb78bd58e15bb';
 
@@ -2104,7 +2130,13 @@ function openPayment(service, price) {
   document.getElementById('paymentForm').reset();
   document.getElementById('fileUploadWrapper').classList.remove('has-file');
   document.getElementById('uploadWarning').classList.remove('show');
+  document.getElementById('paymentWarning').classList.remove('show');
   uploadedImageUrl = '';
+  
+  // Deselect all payment methods
+  document.querySelectorAll('.payment-method').forEach(el => {
+    el.classList.remove('selected');
+  });
 }
 
 function closePayment() {
@@ -2141,6 +2173,9 @@ function selectPayment(element) {
   if (radio) {
     radio.checked = true;
   }
+  
+  // Hide warning if shown
+  document.getElementById('paymentWarning').classList.remove('show');
 }
 
 // Copy Address
@@ -2249,6 +2284,20 @@ function uploadToImgBB(file) {
   });
 }
 
+// Send Email via EmailJS
+function sendEmail(data) {
+  return emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+    service_name: data.service_name,
+    price: data.price,
+    customer_name: data.customer_name,
+    customer_email: data.customer_email,
+    customer_telegram: data.customer_telegram,
+    payment_method: data.payment_method,
+    project_details: data.project_details,
+    screenshot_link: data.screenshot_link
+  });
+}
+
 // Submit Order
 function submitOrder(event) {
   event.preventDefault();
@@ -2268,15 +2317,44 @@ function submitOrder(event) {
   
   // Get selected payment method
   const selectedPayment = document.querySelector('.payment-method.selected .pm-radio');
-  const paymentMethod = selectedPayment ? selectedPayment.value : 'Not selected';
+  const paymentMethod = selectedPayment ? selectedPayment.value : null;
   
-  // Validate
+  // Validate payment method
+  if (!paymentMethod) {
+    document.getElementById('paymentWarning').classList.add('show');
+    document.getElementById('paymentWarning').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+  
+  // Validate required fields
   if (!name || !email || !telegram) {
     alert('Please fill in all required fields.');
     return;
   }
   
-  // Build message with image link
+  // Build data for email
+  const emailData = {
+    service_name: currentService,
+    price: currentPrice,
+    customer_name: name,
+    customer_email: email,
+    customer_telegram: telegram,
+    payment_method: paymentMethod,
+    project_details: projectDetails || 'No additional details provided.',
+    screenshot_link: uploadedImageUrl
+  };
+  
+  // Send email notification
+  sendEmail(emailData)
+    .then(function(response) {
+      console.log('✅ Email sent successfully!', response);
+    })
+    .catch(function(error) {
+      console.error('❌ Email failed:', error);
+      // Don't block order submission if email fails
+    });
+  
+  // Build Telegram message
   const message = `🆕 *NEW ORDER WITH PAYMENT SCREENSHOT!*
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -2311,7 +2389,7 @@ ${uploadedImageUrl}
   
   // Show success message
   setTimeout(() => {
-    alert('✅ Order submitted with payment proof! We will verify and contact you on Telegram shortly.');
+    alert('✅ Order submitted! You will receive a confirmation email shortly. We will verify payment and contact you on Telegram.');
   }, 500);
 }
 </script>
