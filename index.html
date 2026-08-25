@@ -1542,6 +1542,31 @@ footer{
   .dashboard-stats{
     grid-template-columns:repeat(2,1fr);
   }
+  .mobile-menu{
+    display:flex !important;
+    gap:8px;
+    align-items:center;
+    flex-wrap:wrap;
+    width:100%;
+    justify-content:center;
+    padding-top:8px;
+    border-top:1px solid rgba(255,210,26,.1);
+  }
+  .mobile-menu a{
+    color:#c3ccd6;
+    font-size:12px;
+  }
+  .mobile-menu a:hover{
+    color:var(--gold);
+  }
+  .mobile-menu .nav-dashboard-btn{
+    font-size:12px;
+    padding:8px 14px;
+  }
+  .mobile-menu .nav-button{
+    font-size:12px;
+    padding:8px 14px;
+  }
 }
 
 @media(max-width:620px){
@@ -1616,6 +1641,10 @@ footer{
     padding:15px 10px;
   }
 }
+
+.mobile-menu{
+  display:none;
+}
 </style>
 </head>
 <body>
@@ -1643,24 +1672,22 @@ footer{
 <a href="https://t.me/WalexEcom?text=Hello%20WalexEcom%2C%20I%27d%20like%20to%20discuss%20your%20marketing%20services." target="_blank" class="nav-button">💬 Message</a>
 </div>
 
-<!-- Mobile Menu -->
-<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;width:100%;justify-content:center;padding-top:8px;border-top:1px solid rgba(255,210,26,.1);">
-<a href="#home" style="color:#c3ccd6;font-size:13px;">Home</a>
-<a href="#telegram-ads" style="color:#c3ccd6;font-size:13px;">Ads</a>
-<a href="#services" style="color:#c3ccd6;font-size:13px;">Services</a>
-<a href="#youtube" style="color:#c3ccd6;font-size:13px;">YouTube</a>
-<a href="#reviews" style="color:#c3ccd6;font-size:13px;">Reviews</a>
-<a href="#faq" style="color:#c3ccd6;font-size:13px;">FAQ</a>
-<a href="#contact" style="color:#c3ccd6;font-size:13px;">Contact</a>
-<button onclick="showDashboard()" class="nav-dashboard-btn" style="font-size:12px;padding:8px 14px;">📊 Dashboard</button>
-<a href="https://t.me/WalexEcom?text=Hello%20WalexEcom%2C%20I%27d%20like%20to%20discuss%20your%20marketing%20services." target="_blank" class="nav-button" style="font-size:12px;padding:8px 14px;">💬 Message</a>
+<div class="mobile-menu">
+<a href="#home">Home</a>
+<a href="#telegram-ads">Ads</a>
+<a href="#services">Services</a>
+<a href="#youtube">YouTube</a>
+<a href="#reviews">Reviews</a>
+<a href="#faq">FAQ</a>
+<a href="#contact">Contact</a>
+<button onclick="showDashboard()" class="nav-dashboard-btn">📊 Dashboard</button>
+<a href="https://t.me/WalexEcom?text=Hello%20WalexEcom%2C%20I%27d%20like%20to%20discuss%20your%20marketing%20services." target="_blank" class="nav-button">💬 Message</a>
 </div>
 
 </div>
 </nav>
 
 
-<!-- HERO -->
 <section class="hero" id="home">
 <div class="container hero-grid">
 
@@ -1759,7 +1786,6 @@ Mini App
 </section>
 
 
-<!-- TRUST BAR -->
 <div class="trustbar">
 
 <div class="container trust-grid">
@@ -1794,7 +1820,6 @@ Telegram Support
 </div>
 
 
-<!-- TELEGRAM ADS -->
 <section id="telegram-ads" class="ads-section">
 
 <div class="container">
@@ -1813,7 +1838,6 @@ Click any service to place an order. Complete your details, upload payment scree
 
 <div class="ads-grid">
 
-<!-- Card 1 -->
 <div class="ad-card" onclick="openPayment('Telegram Fragment Verification', '$30')">
 <div class="ad-icon">🔐</div>
 <div class="ad-badge">New</div>
@@ -1826,7 +1850,6 @@ Click any service to place an order. Complete your details, upload payment scree
 <span class="order-button">➤ Order Now</span>
 </div>
 
-<!-- Card 2 -->
 <div class="ad-card" onclick="openPayment('Run Ads for Telegram Bot', '$40')">
 <div class="ad-icon">🤖</div>
 <div class="ad-badge">Popular</div>
@@ -1839,7 +1862,6 @@ Click any service to place an order. Complete your details, upload payment scree
 <span class="order-button">➤ Order Now</span>
 </div>
 
-<!-- Card 3 -->
 <div class="ad-card" onclick="openPayment('Run Ads for Channel', '$60')">
 <div class="ad-icon">📢</div>
 <div class="ad-badge">Popular</div>
@@ -1852,7 +1874,6 @@ Click any service to place an order. Complete your details, upload payment scree
 <span class="order-button">➤ Order Now</span>
 </div>
 
-<!-- Card 4 -->
 <div class="ad-card" onclick="openPayment('Run Ads for Telegram Mini App', '$40')">
 <div class="ad-icon">📱</div>
 <div class="ad-badge">New</div>
@@ -1865,7 +1886,6 @@ Click any service to place an order. Complete your details, upload payment scree
 <span class="order-button">➤ Order Now</span>
 </div>
 
-<!-- Card 5 -->
 <div class="ad-card" onclick="openPayment('Buy Already Approved Telegram Bot', '$70')">
 <div class="ad-icon">✅</div>
 <h3>Buy Already Approved Telegram Bot</h3>
@@ -1877,7 +1897,6 @@ Click any service to place an order. Complete your details, upload payment scree
 <span class="order-button">➤ Order Now</span>
 </div>
 
-<!-- Card 6 -->
 <div class="ad-card" onclick="openPayment('Buy Already Approved Telegram Channel', '$150')">
 <div class="ad-icon">📣</div>
 <h3>Buy Already Approved Telegram Channel</h3>
@@ -1889,7 +1908,6 @@ Click any service to place an order. Complete your details, upload payment scree
 <span class="order-button">➤ Order Now</span>
 </div>
 
-<!-- Card 7 -->
 <div class="ad-card" onclick="openPayment('Buy Already Approved Mini App', '$100')">
 <div class="ad-icon">🚀</div>
 <h3>Buy Already Approved Mini App</h3>
@@ -1901,7 +1919,6 @@ Click any service to place an order. Complete your details, upload payment scree
 <span class="order-button">➤ Order Now</span>
 </div>
 
-<!-- Card 8 -->
 <div class="ad-card" onclick="openPayment('Buy Already Approved Automation Telegram Post Bot for Your Channel', '$200')">
 <div class="ad-icon">⚙️</div>
 <h3>Buy Already Approved Automation Telegram Post Bot for Your Channel</h3>
@@ -1918,7 +1935,6 @@ Click any service to place an order. Complete your details, upload payment scree
 </section>
 
 
-<!-- SERVICES -->
 <section id="services">
 
 <div class="container">
@@ -1996,7 +2012,6 @@ target="_blank">
 </section>
 
 
-<!-- WHY -->
 <section class="why">
 
 <div class="container why-grid">
@@ -2038,7 +2053,6 @@ direct Telegram support and simple ordering.
 </section>
 
 
-<!-- HOW IT WORKS -->
 <section id="how-it-works">
 
 <div class="container">
@@ -2094,7 +2108,6 @@ Choose a service, fill in your details, upload payment proof, and submit.
 </section>
 
 
-<!-- YOUTUBE -->
 <section id="youtube" class="youtube-section">
 
 <div class="container">
@@ -2145,7 +2158,6 @@ allowfullscreen>
 </section>
 
 
-<!-- REVIEWS -->
 <section id="reviews">
 
 <div class="container">
@@ -2190,7 +2202,6 @@ Real feedback from our satisfied clients.
 </section>
 
 
-<!-- FAQ -->
 <section id="faq">
 
 <div class="container">
@@ -2246,7 +2257,6 @@ Yes. Contact us directly and describe what you need.
 </section>
 
 
-<!-- CTA -->
 <section id="contact">
 
 <div class="container">
@@ -2277,10 +2287,7 @@ class="button button-gold">
 </section>
 
 
-<!-- ========================================
-     PAYMENT MODAL
-     ======================================== -->
-
+<!-- PAYMENT MODAL -->
 <div class="modal-overlay" id="paymentModal">
 
 <div class="modal">
@@ -2329,7 +2336,6 @@ class="button button-gold">
 
 <div class="payment-methods-grid">
 
-<!-- Bitcoin -->
 <div class="payment-method" onclick="selectPayment(this)">
 <div class="pm-name">
 <span class="pm-icon">₿</span> Bitcoin (BTC)
@@ -2342,7 +2348,6 @@ class="button button-gold">
 <input type="radio" name="paymentMethod" value="Bitcoin (BTC)" class="pm-radio">
 </div>
 
-<!-- USDT -->
 <div class="payment-method" onclick="selectPayment(this)">
 <div class="pm-name">
 <span class="pm-icon">💎</span> USDT (TRC20)
@@ -2355,7 +2360,6 @@ class="button button-gold">
 <input type="radio" name="paymentMethod" value="USDT (TRC20)" class="pm-radio">
 </div>
 
-<!-- TON -->
 <div class="payment-method" onclick="selectPayment(this)">
 <div class="pm-name">
 <span class="pm-icon">⚡</span> TON
@@ -2368,7 +2372,6 @@ class="button button-gold">
 <input type="radio" name="paymentMethod" value="TON" class="pm-radio">
 </div>
 
-<!-- Solana -->
 <div class="payment-method" onclick="selectPayment(this)">
 <div class="pm-name">
 <span class="pm-icon">◎</span> Solana (SOL)
@@ -2385,7 +2388,6 @@ class="button button-gold">
 
 <div class="payment-warning" id="paymentWarning">⚠️ Please select a payment method.</div>
 
-<!-- FILE UPLOAD -->
 <div class="form-group" style="margin-top:20px;">
 <label>📸 Upload Payment Screenshot *</label>
 <div class="file-upload-wrapper" id="fileUploadWrapper">
@@ -2406,16 +2408,12 @@ class="button button-gold">
 </div>
 
 
-<!-- ========================================
-     DASHBOARD OVERLAY
-     ======================================== -->
-
+<!-- DASHBOARD OVERLAY -->
 <div class="dashboard-overlay" id="dashboardOverlay">
 <button class="dashboard-close" onclick="closeDashboard()">✕</button>
 
 <div class="dashboard-box">
 
-<!-- Login Screen -->
 <div id="dashboardLogin">
 <div class="dashboard-login">
 <h2>📊 Admin Dashboard</h2>
@@ -2426,7 +2424,6 @@ class="button button-gold">
 </div>
 </div>
 
-<!-- Dashboard Content -->
 <div id="dashboardContent" style="display:none;">
 
 <div class="dashboard-header">
@@ -2491,7 +2488,6 @@ aria-label="Contact WalexEcom">
 </a>
 
 
-<!-- FOOTER -->
 <footer>
 
 <div class="container footer">
@@ -2524,14 +2520,9 @@ class="footer-link">
 </footer>
 
 
-<!-- ========================================
-     JAVASCRIPT
-     ======================================== -->
-
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 
 <script>
-// CONFIG
 const DASHBOARD_PASSWORD = 'Dayo20$$';
 const EMAILJS_PUBLIC_KEY = 'DYFxYul-k5mUo9x9VoI7k';
 const EMAILJS_SERVICE_ID = 'service_lv0ipk7';
@@ -2540,7 +2531,6 @@ const IMGBB_API_KEY = '03544e7193c78616e6bfb78bd58e15bb';
 
 emailjs.init(EMAILJS_PUBLIC_KEY);
 
-// DASHBOARD FUNCTIONS
 function showDashboard() {
     document.getElementById('dashboardOverlay').classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -2741,7 +2731,6 @@ function exportOrders() {
     URL.revokeObjectURL(url);
 }
 
-// PAYMENT MODAL FUNCTIONS
 let currentService = '';
 let currentPrice = '';
 let uploadedImageUrl = '';
@@ -2873,7 +2862,6 @@ function sendEmail(data) {
     });
 }
 
-// SUBMIT ORDER
 function submitOrder(event) {
     event.preventDefault();
     
@@ -2957,7 +2945,6 @@ ${uploadedImageUrl}
     }, 500);
 }
 
-// Keyboard shortcut: Ctrl+D to open Dashboard
 document.addEventListener('keydown', function(e) {
     if (e.ctrlKey && e.key === 'd') {
         e.preventDefault();
