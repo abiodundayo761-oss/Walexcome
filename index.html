@@ -71,6 +71,7 @@ a{
   align-items:center;
   justify-content:space-between;
   gap:20px;
+  flex-wrap:wrap;
 }
 
 .brand{
@@ -107,6 +108,8 @@ a{
   gap:25px;
   color:#c3ccd6;
   font-size:14px;
+  align-items:center;
+  flex-wrap:wrap;
 }
 
 .menu a:hover{
@@ -119,6 +122,18 @@ a{
   background:linear-gradient(180deg,#ffdd36,#ffb800);
   color:#111;
   font-weight:900;
+}
+
+.nav-button-dashboard{
+  padding:11px 18px;
+  border-radius:10px;
+  background:linear-gradient(180deg,#229ed9,#176b99);
+  color:#fff;
+  font-weight:900;
+}
+
+.nav-button-dashboard:hover{
+  opacity:0.85;
 }
 
 /* BUTTONS */
@@ -1162,6 +1177,302 @@ footer{
 }
 
 /* ========================================
+   DASHBOARD STYLES
+   ======================================== */
+
+.dashboard-container{
+  display:none;
+  padding:30px 20px;
+}
+
+.dashboard-container.active{
+  display:block;
+}
+
+.dashboard-login{
+  max-width:400px;
+  margin:100px auto;
+  padding:40px;
+  border:1px solid rgba(255,210,26,.2);
+  border-radius:20px;
+  background:linear-gradient(180deg,#0a121c,#04080e);
+  text-align:center;
+}
+
+.dashboard-login h2{
+  color:var(--gold);
+  margin-bottom:10px;
+}
+
+.dashboard-login input{
+  width:100%;
+  padding:14px;
+  border-radius:10px;
+  border:1px solid #2b343d;
+  background:#08101a;
+  color:#fff;
+  font-size:16px;
+  margin-bottom:15px;
+}
+
+.dashboard-login button{
+  width:100%;
+  padding:14px;
+  border-radius:10px;
+  background:linear-gradient(180deg,#ffdf37,#ffb800);
+  color:#111;
+  font-weight:900;
+  font-size:18px;
+  border:none;
+  cursor:pointer;
+}
+
+.dashboard-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.dashboard-header h2{
+  color:var(--gold);
+  font-size:28px;
+}
+
+.dashboard-stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.stat-card{
+  padding:20px;
+  border:1px solid #2b343d;
+  border-radius:15px;
+  background:#08101a;
+  text-align:center;
+}
+
+.stat-card .stat-number{
+  font-size:32px;
+  font-weight:900;
+  color:var(--gold);
+}
+
+.stat-card .stat-label{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.dashboard-table-wrap{
+  overflow-x:auto;
+  border:1px solid #2b343d;
+  border-radius:15px;
+  background:#08101a;
+  padding:15px;
+}
+
+.dashboard-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:14px;
+}
+
+.dashboard-table th{
+  text-align:left;
+  padding:12px 10px;
+  color:var(--gold);
+  border-bottom:2px solid #2b343d;
+}
+
+.dashboard-table td{
+  padding:12px 10px;
+  border-bottom:1px solid #2b343d;
+  color:#d0d8e0;
+}
+
+.dashboard-table tr:hover td{
+  background:rgba(255,210,26,0.03);
+}
+
+.status-badge{
+  padding:4px 12px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:700;
+  display:inline-block;
+}
+
+.status-pending{
+  background:#ff6b6b;
+  color:#fff;
+}
+
+.status-paid{
+  background:#ffd93d;
+  color:#111;
+}
+
+.status-running{
+  background:#6bcbff;
+  color:#111;
+}
+
+.status-complete{
+  background:#6bcb6b;
+  color:#111;
+}
+
+.dashboard-actions button{
+  padding:6px 12px;
+  border-radius:8px;
+  border:none;
+  cursor:pointer;
+  font-weight:700;
+  font-size:12px;
+  margin:2px;
+}
+
+.btn-view{
+  background:#229ed9;
+  color:#fff;
+}
+
+.btn-delete{
+  background:#ff4444;
+  color:#fff;
+}
+
+.dashboard-search{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:15px;
+}
+
+.dashboard-search input{
+  padding:10px 15px;
+  border-radius:10px;
+  border:1px solid #2b343d;
+  background:#08101a;
+  color:#fff;
+  flex:1;
+  min-width:200px;
+}
+
+.dashboard-search select{
+  padding:10px 15px;
+  border-radius:10px;
+  border:1px solid #2b343d;
+  background:#08101a;
+  color:#fff;
+}
+
+.dashboard-export{
+  padding:10px 20px;
+  border-radius:10px;
+  background:linear-gradient(180deg,#229ed9,#176b99);
+  color:#fff;
+  border:none;
+  cursor:pointer;
+  font-weight:700;
+}
+
+.dashboard-logout{
+  padding:10px 20px;
+  border-radius:10px;
+  background:#ff4444;
+  color:#fff;
+  border:none;
+  cursor:pointer;
+  font-weight:700;
+}
+
+/* Order Detail Modal */
+.order-detail-modal{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.9);
+  z-index:10000;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+.order-detail-modal.active{
+  display:flex;
+}
+
+.order-detail-content{
+  max-width:600px;
+  width:100%;
+  background:linear-gradient(180deg,#0a121c,#04080e);
+  border:1px solid rgba(255,210,26,.2);
+  border-radius:20px;
+  padding:30px;
+  max-height:90vh;
+  overflow-y:auto;
+  position:relative;
+}
+
+.order-detail-content h3{
+  color:var(--gold);
+  margin-bottom:15px;
+}
+
+.order-detail-content .close-detail{
+  position:absolute;
+  top:15px;
+  right:20px;
+  background:none;
+  border:none;
+  color:#fff;
+  font-size:28px;
+  cursor:pointer;
+}
+
+.order-detail-content p{
+  margin:8px 0;
+  color:#d0d8e0;
+}
+
+.order-detail-content strong{
+  color:#fff;
+}
+
+.order-detail-content .detail-screenshot{
+  margin-top:10px;
+}
+
+.order-detail-content .detail-screenshot img{
+  max-width:100%;
+  border-radius:10px;
+  border:1px solid #2b343d;
+}
+
+.detail-status-buttons{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:15px;
+}
+
+.detail-status-buttons button{
+  padding:8px 18px;
+  border-radius:8px;
+  border:none;
+  cursor:pointer;
+  font-weight:700;
+}
+
+/* ========================================
    MOBILE RESPONSIVE
    ======================================== */
 
@@ -1191,6 +1502,10 @@ footer{
 
   .payment-methods-grid{
     grid-template-columns:1fr 1fr;
+  }
+
+  .dashboard-stats{
+    grid-template-columns:repeat(2,1fr);
   }
 }
 
@@ -1273,6 +1588,19 @@ footer{
   .modal h2{
     font-size:22px;
   }
+
+  .dashboard-stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .dashboard-header{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .dashboard-search{
+    flex-direction:column;
+  }
 }
 </style>
 </head>
@@ -1298,6 +1626,7 @@ footer{
 <a href="#reviews">Reviews</a>
 <a href="#faq">FAQ</a>
 <a href="#contact">Contact</a>
+<a href="#" onclick="showDashboard()" style="color:var(--gold);font-weight:900;">📊 Dashboard</a>
 </div>
 
 <a
@@ -2049,6 +2378,103 @@ class="button button-gold">
 </div>
 
 
+<!-- ========================================
+     DASHBOARD SECTION
+     ======================================== -->
+
+<div class="dashboard-container" id="dashboardContainer">
+
+<div class="container">
+
+<!-- Login Screen -->
+<div id="dashboardLogin" class="dashboard-login">
+<h2>📊 Admin Dashboard</h2>
+<p style="color:var(--muted);margin-bottom:20px;">Enter your password to access orders</p>
+<input type="password" id="dashboardPassword" placeholder="Enter password..." onkeydown="if(event.key==='Enter') dashboardLogin()">
+<button onclick="dashboardLogin()">🔓 Login</button>
+<p id="dashboardLoginError" style="color:#ff6b6b;margin-top:10px;display:none;">❌ Incorrect password. Try again.</p>
+</div>
+
+<!-- Dashboard Content -->
+<div id="dashboardContent" style="display:none;">
+
+<div class="dashboard-header">
+<h2>📊 Order Dashboard</h2>
+<div>
+<button class="dashboard-export" onclick="exportOrders()">📤 Export CSV</button>
+<button class="dashboard-logout" onclick="dashboardLogout()">🚪 Logout</button>
+</div>
+</div>
+
+<!-- Stats -->
+<div class="dashboard-stats" id="dashboardStats">
+<div class="stat-card">
+<div class="stat-number" id="statTotal">0</div>
+<div class="stat-label">📦 Total Orders</div>
+</div>
+<div class="stat-card">
+<div class="stat-number" id="statRevenue">$0</div>
+<div class="stat-label">💰 Total Revenue</div>
+</div>
+<div class="stat-card">
+<div class="stat-number" id="statPending">0</div>
+<div class="stat-label">⏳ Pending</div>
+</div>
+<div class="stat-card">
+<div class="stat-number" id="statComplete">0</div>
+<div class="stat-label">✅ Completed</div>
+</div>
+</div>
+
+<!-- Search & Filter -->
+<div class="dashboard-search">
+<input type="text" id="dashboardSearch" placeholder="🔍 Search by name, service, email..." oninput="renderOrders()">
+<select id="dashboardFilter" onchange="renderOrders()">
+<option value="all">All Status</option>
+<option value="Pending">⏳ Pending</option>
+<option value="Paid">💳 Paid</option>
+<option value="Running">▶️ Running</option>
+<option value="Complete">✅ Complete</option>
+</select>
+</div>
+
+<!-- Orders Table -->
+<div class="dashboard-table-wrap">
+<table class="dashboard-table">
+<thead>
+<tr>
+<th>#</th>
+<th>Date</th>
+<th>Customer</th>
+<th>Service</th>
+<th>Price</th>
+<th>Payment</th>
+<th>Status</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody id="dashboardOrdersBody">
+<tr><td colspan="8" style="text-align:center;color:var(--muted);padding:30px;">No orders found.</td></tr>
+</tbody>
+</table>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- Order Detail Modal -->
+<div class="order-detail-modal" id="orderDetailModal">
+<div class="order-detail-content">
+<button class="close-detail" onclick="closeOrderDetail()">✕</button>
+<h3>📋 Order Details</h3>
+<div id="orderDetailContent">
+<p>Loading...</p>
+</div>
+</div>
+</div>
+
+
 <a
 href="https://t.me/WalexEcom?text=Hello%20WalexEcom%2C%20I%27d%20like%20to%20discuss%20your%20services."
 target="_blank"
@@ -2097,20 +2523,248 @@ class="footer-link">
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 
 <script>
+// ============================================
+// CONFIGURATION
+// ============================================
+
+const DASHBOARD_PASSWORD = 'Dayo20$$';
+
 // EmailJS Configuration
 const EMAILJS_PUBLIC_KEY = 'DYFxYul-k5mUo9x9VoI7k';
 const EMAILJS_SERVICE_ID = 'service_lv0ipk7';
 const EMAILJS_TEMPLATE_ID = 'template_k4z0p2p';
+
+// ImgBB API Key
+const IMGBB_API_KEY = '03544e7193c78616e6bfb78bd58e15bb';
 
 // Initialize EmailJS
 (function() {
     emailjs.init(EMAILJS_PUBLIC_KEY);
 })();
 
-// ImgBB API Key
-const IMGBB_API_KEY = '03544e7193c78616e6bfb78bd58e15bb';
+// ============================================
+// DASHBOARD FUNCTIONS
+// ============================================
 
-// Payment Modal Functions
+function showDashboard() {
+    document.querySelectorAll('section').forEach(el => el.style.display = 'none');
+    document.querySelector('.trustbar').style.display = 'none';
+    document.querySelector('.hero').style.display = 'none';
+    document.getElementById('dashboardContainer').classList.add('active');
+    document.getElementById('dashboardContainer').style.display = 'block';
+    window.scrollTo(0, 0);
+}
+
+function hideDashboard() {
+    document.querySelectorAll('section').forEach(el => el.style.display = 'block');
+    document.querySelector('.trustbar').style.display = 'block';
+    document.querySelector('.hero').style.display = 'block';
+    document.getElementById('dashboardContainer').classList.remove('active');
+    document.getElementById('dashboardContainer').style.display = 'none';
+}
+
+function dashboardLogin() {
+    const password = document.getElementById('dashboardPassword').value;
+    if (password === DASHBOARD_PASSWORD) {
+        document.getElementById('dashboardLogin').style.display = 'none';
+        document.getElementById('dashboardContent').style.display = 'block';
+        document.getElementById('dashboardLoginError').style.display = 'none';
+        renderOrders();
+    } else {
+        document.getElementById('dashboardLoginError').style.display = 'block';
+    }
+}
+
+function dashboardLogout() {
+    document.getElementById('dashboardLogin').style.display = 'block';
+    document.getElementById('dashboardContent').style.display = 'none';
+    document.getElementById('dashboardPassword').value = '';
+    document.getElementById('dashboardLoginError').style.display = 'none';
+    hideDashboard();
+}
+
+function getOrders() {
+    try {
+        const data = localStorage.getItem('walexecom_orders');
+        return data ? JSON.parse(data) : [];
+    } catch {
+        return [];
+    }
+}
+
+function saveOrders(orders) {
+    localStorage.setItem('walexecom_orders', JSON.stringify(orders));
+}
+
+function addOrder(order) {
+    const orders = getOrders();
+    order.id = Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
+    order.status = 'Pending';
+    order.date = new Date().toISOString();
+    orders.unshift(order);
+    saveOrders(orders);
+}
+
+function updateOrderStatus(orderId, newStatus) {
+    const orders = getOrders();
+    const order = orders.find(o => o.id === orderId);
+    if (order) {
+        order.status = newStatus;
+        saveOrders(orders);
+        renderOrders();
+    }
+}
+
+function deleteOrder(orderId) {
+    if (!confirm('Delete this order?')) return;
+    let orders = getOrders();
+    orders = orders.filter(o => o.id !== orderId);
+    saveOrders(orders);
+    renderOrders();
+}
+
+function renderOrders() {
+    const orders = getOrders();
+    const search = document.getElementById('dashboardSearch').value.toLowerCase();
+    const filter = document.getElementById('dashboardFilter').value;
+    
+    let filtered = orders;
+    
+    if (search) {
+        filtered = filtered.filter(o => 
+            o.customerName.toLowerCase().includes(search) ||
+            o.service.toLowerCase().includes(search) ||
+            o.email.toLowerCase().includes(search)
+        );
+    }
+    
+    if (filter !== 'all') {
+        filtered = filtered.filter(o => o.status === filter);
+    }
+    
+    // Update stats
+    const total = orders.length;
+    const revenue = orders.reduce((sum, o) => sum + parseFloat(o.price.replace('$', '') || 0), 0);
+    const pending = orders.filter(o => o.status === 'Pending').length;
+    const complete = orders.filter(o => o.status === 'Complete').length;
+    
+    document.getElementById('statTotal').textContent = total;
+    document.getElementById('statRevenue').textContent = '$' + revenue;
+    document.getElementById('statPending').textContent = pending;
+    document.getElementById('statComplete').textContent = complete;
+    
+    // Render table
+    const tbody = document.getElementById('dashboardOrdersBody');
+    
+    if (filtered.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--muted);padding:30px;">No orders found.</td></tr>';
+        return;
+    }
+    
+    tbody.innerHTML = filtered.map((order, index) => {
+        const statusClass = {
+            'Pending': 'status-pending',
+            'Paid': 'status-paid',
+            'Running': 'status-running',
+            'Complete': 'status-complete'
+        }[order.status] || 'status-pending';
+        
+        const date = new Date(order.date);
+        const dateStr = date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+        
+        return `<tr>
+            <td>${index + 1}</td>
+            <td>${dateStr}</td>
+            <td><strong>${order.customerName}</strong><br><small style="color:var(--muted)">${order.telegram}</small></td>
+            <td>${order.service}</td>
+            <td><strong style="color:var(--gold)">${order.price}</strong></td>
+            <td>${order.paymentMethod}</td>
+            <td><span class="status-badge ${statusClass}">${order.status}</span></td>
+            <td class="dashboard-actions">
+                <button class="btn-view" onclick="viewOrder('${order.id}')">👁️</button>
+                ${order.status !== 'Complete' ? `<button class="btn-view" style="background:#6bcb6b;" onclick="updateOrderStatus('${order.id}','Complete')">✅</button>` : ''}
+                <button class="btn-delete" onclick="deleteOrder('${order.id}')">🗑️</button>
+            </td>
+        </tr>`;
+    }).join('');
+}
+
+function viewOrder(orderId) {
+    const orders = getOrders();
+    const order = orders.find(o => o.id === orderId);
+    if (!order) return;
+    
+    const modal = document.getElementById('orderDetailModal');
+    const content = document.getElementById('orderDetailContent');
+    
+    content.innerHTML = `
+        <p><strong>📌 Service:</strong> ${order.service}</p>
+        <p><strong>💰 Price:</strong> ${order.price}</p>
+        <p><strong>👤 Name:</strong> ${order.customerName}</p>
+        <p><strong>📧 Email:</strong> ${order.email}</p>
+        <p><strong>💬 Telegram:</strong> ${order.telegram}</p>
+        <p><strong>💳 Payment:</strong> ${order.paymentMethod}</p>
+        <p><strong>📝 Project Details:</strong><br>${order.projectDetails || 'No details provided.'}</p>
+        <p><strong>📅 Date:</strong> ${new Date(order.date).toLocaleString()}</p>
+        <p><strong>📎 Screenshot:</strong> <a href="${order.screenshotLink}" target="_blank" style="color:var(--gold);">View Screenshot</a></p>
+        <p><strong>📊 Status:</strong> <span class="status-badge ${order.status === 'Complete' ? 'status-complete' : 'status-pending'}">${order.status}</span></p>
+        
+        <div class="detail-status-buttons">
+            ${order.status !== 'Paid' ? `<button style="background:#ffd93d;" onclick="updateOrderStatus('${order.id}','Paid');viewOrder('${order.id}');">💳 Mark Paid</button>` : ''}
+            ${order.status !== 'Running' ? `<button style="background:#6bcbff;" onclick="updateOrderStatus('${order.id}','Running');viewOrder('${order.id}');">▶️ Mark Running</button>` : ''}
+            ${order.status !== 'Complete' ? `<button style="background:#6bcb6b;" onclick="updateOrderStatus('${order.id}','Complete');viewOrder('${order.id}');">✅ Mark Complete</button>` : ''}
+        </div>
+    `;
+    
+    modal.classList.add('active');
+}
+
+function closeOrderDetail() {
+    document.getElementById('orderDetailModal').classList.remove('active');
+}
+
+// Close detail modal on overlay click
+document.getElementById('orderDetailModal').addEventListener('click', function(e) {
+    if (e.target === this) closeOrderDetail();
+});
+
+function exportOrders() {
+    const orders = getOrders();
+    if (orders.length === 0) {
+        alert('No orders to export.');
+        return;
+    }
+    
+    let csv = 'Order ID,Date,Name,Email,Telegram,Service,Price,Payment Method,Status,Project Details,Screenshot Link\n';
+    orders.forEach(o => {
+        const row = [
+            o.id,
+            new Date(o.date).toLocaleString(),
+            `"${o.customerName}"`,
+            `"${o.email}"`,
+            `"${o.telegram}"`,
+            `"${o.service}"`,
+            o.price,
+            `"${o.paymentMethod}"`,
+            o.status,
+            `"${(o.projectDetails || '').replace(/"/g, '""')}"`,
+            `"${o.screenshotLink}"`
+        ];
+        csv += row.join(',') + '\n';
+    });
+    
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `walexecom_orders_${new Date().toISOString().slice(0,10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+// ============================================
+// PAYMENT MODAL FUNCTIONS
+// ============================================
 
 let currentService = '';
 let currentPrice = '';
@@ -2160,21 +2814,17 @@ document.addEventListener('keydown', function(e) {
 
 // Select Payment Method
 function selectPayment(element) {
-  // Remove selected class from all
   document.querySelectorAll('.payment-method').forEach(el => {
     el.classList.remove('selected');
   });
   
-  // Add selected class to clicked
   element.classList.add('selected');
   
-  // Check the radio button
   const radio = element.querySelector('.pm-radio');
   if (radio) {
     radio.checked = true;
   }
   
-  // Hide warning if shown
   document.getElementById('paymentWarning').classList.remove('show');
 }
 
@@ -2184,7 +2834,6 @@ function copyAddress(elementId) {
   const address = element.textContent.trim();
   
   navigator.clipboard.writeText(address).then(() => {
-    // Show feedback
     const copyBtn = element.parentElement.querySelector('.pm-copy');
     const originalText = copyBtn.textContent;
     copyBtn.textContent = '✅ Copied!';
@@ -2192,7 +2841,6 @@ function copyAddress(elementId) {
       copyBtn.textContent = originalText;
     }, 2000);
   }).catch(() => {
-    // Fallback
     const textArea = document.createElement('textarea');
     textArea.value = address;
     document.body.appendChild(textArea);
@@ -2217,14 +2865,12 @@ function handleFileSelect(input) {
   const warning = document.getElementById('uploadWarning');
   
   if (file) {
-    // Check file size (5MB max)
     if (file.size > 5 * 1024 * 1024) {
       alert('File is too large. Maximum size is 5MB.');
       input.value = '';
       return;
     }
     
-    // Check file type
     if (!file.type.startsWith('image/')) {
       alert('Please upload an image file (JPG, PNG, etc.)');
       input.value = '';
@@ -2235,7 +2881,6 @@ function handleFileSelect(input) {
     fileName.textContent = file.name;
     warning.classList.remove('show');
     
-    // Upload to ImgBB
     uploadToImgBB(file);
   } else {
     wrapper.classList.remove('has-file');
@@ -2261,22 +2906,18 @@ function uploadToImgBB(file) {
   .then(data => {
     if (data.success) {
       uploadedImageUrl = data.data.url;
-      console.log('✅ Image uploaded:', uploadedImageUrl);
       submitBtn.textContent = '📤 Submit Order with Payment Proof';
       submitBtn.disabled = false;
     } else {
       alert('❌ Failed to upload image. Please try again.');
-      console.error('ImgBB Error:', data);
       submitBtn.textContent = '📤 Submit Order with Payment Proof';
       submitBtn.disabled = false;
-      // Reset file input
       document.getElementById('screenshotUpload').value = '';
       document.getElementById('fileUploadWrapper').classList.remove('has-file');
     }
   })
   .catch(error => {
     alert('❌ Error uploading image. Please try again.');
-    console.error('Upload Error:', error);
     submitBtn.textContent = '📤 Submit Order with Payment Proof';
     submitBtn.disabled = false;
     document.getElementById('screenshotUpload').value = '';
@@ -2298,7 +2939,10 @@ function sendEmail(data) {
   });
 }
 
-// Submit Order
+// ============================================
+// SUBMIT ORDER (UPDATED with Dashboard Save)
+// ============================================
+
 function submitOrder(event) {
   event.preventDefault();
   
@@ -2332,8 +2976,23 @@ function submitOrder(event) {
     return;
   }
   
-  // Build data for email
-  const emailData = {
+  // Build order data
+  const orderData = {
+    customerName: name,
+    email: email,
+    telegram: telegram,
+    service: currentService,
+    price: currentPrice,
+    paymentMethod: paymentMethod,
+    projectDetails: projectDetails || 'No additional details provided.',
+    screenshotLink: uploadedImageUrl
+  };
+  
+  // SAVE TO DASHBOARD (LocalStorage)
+  addOrder(orderData);
+  
+  // Send email notification
+  sendEmail({
     service_name: currentService,
     price: currentPrice,
     customer_name: name,
@@ -2342,17 +3001,13 @@ function submitOrder(event) {
     payment_method: paymentMethod,
     project_details: projectDetails || 'No additional details provided.',
     screenshot_link: uploadedImageUrl
-  };
-  
-  // Send email notification
-  sendEmail(emailData)
-    .then(function(response) {
-      console.log('✅ Email sent successfully!', response);
-    })
-    .catch(function(error) {
-      console.error('❌ Email failed:', error);
-      // Don't block order submission if email fails
-    });
+  })
+  .then(function(response) {
+    console.log('✅ Email sent successfully!');
+  })
+  .catch(function(error) {
+    console.error('❌ Email failed:', error);
+  });
   
   // Build Telegram message
   const message = `🆕 *NEW ORDER WITH PAYMENT SCREENSHOT!*
@@ -2389,9 +3044,20 @@ ${uploadedImageUrl}
   
   // Show success message
   setTimeout(() => {
-    alert('✅ Order submitted! You will receive a confirmation email shortly. We will verify payment and contact you on Telegram.');
+    alert('✅ Order submitted! Check your Dashboard to manage orders. We will verify payment and contact you on Telegram.');
   }, 500);
 }
+
+// ============================================
+// KEYBOARD SHORTCUT: Ctrl+D to open Dashboard
+// ============================================
+
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && e.key === 'd') {
+        e.preventDefault();
+        showDashboard();
+    }
+});
 </script>
 
 </body>
