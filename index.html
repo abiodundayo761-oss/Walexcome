@@ -49,7 +49,7 @@ a{
 }
 
 /* ================================ */
-/* TRANSLATE BAR - MANUAL DROPDOWN */
+/* TRANSLATE BAR - FIXED */
 /* ================================ */
 .translate-bar {
   background: #0a121c;
@@ -100,14 +100,62 @@ a{
   box-shadow: 0 0 0 3px rgba(255,210,26,0.1);
 }
 
-/* Hide Google Translate Banner */
+.translate-bar select option {
+  background: #0a121c;
+  color: #fff;
+}
+
+/* ================================ */
+/* GOOGLE TRANSLATE FIXES */
+/* ================================ */
+#google_translate_element {
+  display: none !important;
+}
+
+/* Hide Google Translate banner completely */
 .goog-te-banner-frame {
   display: none !important;
 }
-body {
-  top: 0 !important;
-}
 .goog-te-gadget {
+  display: none !important;
+}
+.goog-logo-link {
+  display: none !important;
+}
+.goog-te-gadget span {
+  display: none !important;
+}
+.goog-te-combo {
+  display: none !important;
+}
+
+/* Fix white background on Google Translate popup */
+.goog-te-menu2 {
+  background: #0a121c !important;
+  border: 1px solid rgba(255,210,26,.2) !important;
+  border-radius: 12px !important;
+  color: #fff !important;
+}
+.goog-te-menu2-item div {
+  color: #fff !important;
+  background: #0a121c !important;
+}
+.goog-te-menu2-item div:hover {
+  background: rgba(255,210,26,0.1) !important;
+  color: var(--gold) !important;
+}
+.goog-te-menu2-item-selected div {
+  background: rgba(255,210,26,0.2) !important;
+}
+.goog-te-menu2-item .goog-te-menu2-item-selected {
+  background: rgba(255,210,26,0.2) !important;
+}
+
+/* Fix body shifting */
+body {
+  top: 0px !important;
+}
+body > .skiptranslate {
   display: none !important;
 }
 
@@ -1370,7 +1418,7 @@ footer{
 <body>
 
 <!-- ================================ -->
-<!-- TRANSLATE BAR - MANUAL DROPDOWN -->
+<!-- TRANSLATE BAR - FIXED -->
 <!-- ================================ -->
 <div class="translate-bar">
   <div class="translate-label">
@@ -1437,7 +1485,7 @@ footer{
 </nav>
 
 <!-- ===== REST OF YOUR WEBSITE ===== -->
-<!-- (All sections are exactly the same as before) -->
+<!-- (All sections are exactly the same as before - kept short for space) -->
 
 <section class="hero" id="home">
 <div class="container hero-grid">
@@ -1823,7 +1871,7 @@ footer{
 <!-- ======================================== JAVASCRIPT ======================================== -->
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 
-<!-- Google Translate Manual Trigger -->
+<!-- Google Translate Script - LOAD ONCE -->
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <script>
 // Google Translate initialization (hidden)
@@ -1840,19 +1888,24 @@ function googleTranslateElementInit() {
     }
 }
 
-// Function to change language manually
+// Function to change language manually (MORE RELIABLE)
 function changeLanguage(langCode) {
     var select = document.querySelector('.goog-te-combo');
     if (select) {
         select.value = langCode;
         select.dispatchEvent(new Event('change'));
+        // Also trigger the change event for older browsers
+        if (select.fireEvent) {
+            select.fireEvent('onchange');
+        }
     } else {
         // If not loaded, wait and try again
         setTimeout(function() {
             changeLanguage(langCode);
-        }, 1000);
+        }, 500);
     }
-    // Update label
+    
+    // Update label based on language
     var labelMap = {
         'en': 'Translate / ترجمة / Перевод / 翻译',
         'es': 'Traducir / ترجمة / Перевод / 翻译',
@@ -1880,6 +1933,18 @@ function changeLanguage(langCode) {
         labelText.textContent = labelMap[langCode] || 'Translate / ترجمة / Перевод / 翻译';
     }
 }
+
+// Also trigger translation when page loads with dropdown selection
+document.addEventListener('DOMContentLoaded', function() {
+    var select = document.getElementById('languageSelect');
+    if (select) {
+        // Set initial label
+        var initialLabel = document.getElementById('translateLabelText');
+        if (initialLabel) {
+            initialLabel.textContent = 'Translate / ترجمة / Перевод / 翻译';
+        }
+    }
+});
 
 // ============================================
 // DASHBOARD & PAYMENT FUNCTIONS
