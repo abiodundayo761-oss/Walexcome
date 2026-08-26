@@ -36,6 +36,7 @@ body{
   background:radial-gradient(circle at 80% 0%,rgba(255,200,0,.08),transparent 25%),linear-gradient(180deg,#020304,#05080d 50%,#020304);
   color:#fff;
   line-height:1.6;
+  top:0 !important;
 }
 a{
   text-decoration:none;
@@ -48,11 +49,11 @@ a{
 }
 
 /* ================================ */
-/* GOOGLE TRANSLATE BAR - IMPROVED */
+/* TRANSLATE BAR - MANUAL DROPDOWN */
 /* ================================ */
-#google_translate_element {
+.translate-bar {
   background: #0a121c;
-  padding: 6px 15px;
+  padding: 8px 15px;
   border-bottom: 1px solid rgba(255,210,26,.12);
   display: flex;
   align-items: center;
@@ -63,7 +64,7 @@ a{
   z-index: 9999;
 }
 
-#google_translate_element .translate-label {
+.translate-bar .translate-label {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -72,19 +73,11 @@ a{
   font-weight: 700;
 }
 
-#google_translate_element .translate-label span {
+.translate-bar .translate-label span {
   font-size: 18px;
 }
 
-#google_translate_element .goog-te-gadget {
-  color: #fff !important;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  display: inline-flex;
-  align-items: center;
-}
-
-#google_translate_element .goog-te-gadget .goog-te-combo {
+.translate-bar select {
   background: #08101a;
   color: #fff;
   border: 1px solid rgba(255,210,26,.3);
@@ -97,34 +90,25 @@ a{
   font-weight: 500;
 }
 
-#google_translate_element .goog-te-gadget .goog-te-combo:hover {
+.translate-bar select:hover {
   border-color: var(--gold);
   background: rgba(255,210,26,0.05);
 }
 
-#google_translate_element .goog-te-gadget .goog-te-combo:focus {
+.translate-bar select:focus {
   border-color: var(--gold);
   box-shadow: 0 0 0 3px rgba(255,210,26,0.1);
 }
 
-#google_translate_element .goog-te-gadget a {
-  display: none !important;
-}
-
-/* Hide Google branding */
-.goog-logo-link {
-  display: none !important;
-}
-.goog-te-gadget span {
-  display: none !important;
-}
-
-/* Fix for Google Translate banner */
+/* Hide Google Translate Banner */
 .goog-te-banner-frame {
   display: none !important;
 }
 body {
   top: 0 !important;
+}
+.goog-te-gadget {
+  display: none !important;
 }
 
 /* ================================ */
@@ -1352,8 +1336,8 @@ footer{
   .mobile-menu a:hover{color:var(--gold);}
   .mobile-menu .nav-dashboard-btn{font-size:12px;padding:8px 14px;}
   .mobile-menu .nav-button{font-size:12px;padding:8px 14px;}
-  #google_translate_element .translate-label{font-size:12px;}
-  #google_translate_element .goog-te-gadget .goog-te-combo{min-width:120px;font-size:12px;padding:6px 10px;}
+  .translate-bar .translate-label{font-size:12px;}
+  .translate-bar select{min-width:120px;font-size:12px;padding:6px 10px;}
 }
 @media(max-width:620px){
   .brand-sub{display:none;}
@@ -1376,9 +1360,9 @@ footer{
   .dashboard-stats{grid-template-columns:1fr 1fr;}
   .dashboard-box{padding:20px 15px;}
   .dashboard-overlay{padding:15px 10px;}
-  #google_translate_element .translate-label{font-size:10px;gap:4px;}
-  #google_translate_element .goog-te-gadget .goog-te-combo{min-width:90px;font-size:10px;padding:4px 8px;}
-  #google_translate_element{flex-direction:column;gap:6px;padding:8px 10px;}
+  .translate-bar{flex-direction:column;gap:6px;padding:8px 10px;}
+  .translate-bar .translate-label{font-size:10px;gap:4px;}
+  .translate-bar select{min-width:90px;font-size:10px;padding:4px 8px;}
 }
 .mobile-menu{display:none;}
 </style>
@@ -1386,12 +1370,34 @@ footer{
 <body>
 
 <!-- ================================ -->
-<!-- GOOGLE TRANSLATE BAR - IMPROVED -->
+<!-- TRANSLATE BAR - MANUAL DROPDOWN -->
 <!-- ================================ -->
-<div id="google_translate_element">
+<div class="translate-bar">
   <div class="translate-label">
-    <span>🌐</span> Translate / ترجمة / Перевод / 翻译
+    <span>🌐</span> <span id="translateLabelText">Translate / ترجمة / Перевод / 翻译</span>
   </div>
+  <select id="languageSelect" onchange="changeLanguage(this.value)">
+    <option value="en">🇬🇧 English</option>
+    <option value="es">🇪🇸 Español</option>
+    <option value="ar">🇸🇦 العربية</option>
+    <option value="ru">🇷🇺 Русский</option>
+    <option value="zh-CN">🇨🇳 中文</option>
+    <option value="hi">🇮🇳 हिंदी</option>
+    <option value="fr">🇫🇷 Français</option>
+    <option value="pt">🇵🇹 Português</option>
+    <option value="de">🇩🇪 Deutsch</option>
+    <option value="ja">🇯🇵 日本語</option>
+    <option value="tr">🇹🇷 Türkçe</option>
+    <option value="it">🇮🇹 Italiano</option>
+    <option value="ko">🇰🇷 한국어</option>
+    <option value="nl">🇳🇱 Nederlands</option>
+    <option value="pl">🇵🇱 Polski</option>
+    <option value="uk">🇺🇦 Українська</option>
+    <option value="id">🇮🇩 Indonesia</option>
+    <option value="th">🇹🇭 ไทย</option>
+    <option value="el">🇬🇷 Ελληνικά</option>
+    <option value="he">🇮🇱 עברית</option>
+  </select>
 </div>
 
 <nav class="navbar">
@@ -1430,8 +1436,8 @@ footer{
 </div>
 </nav>
 
-<!-- ===== REST OF YOUR WEBSITE (HERO, ADS, SERVICES, ETC.) ===== -->
-<!-- (I've kept all your sections exactly the same as before) -->
+<!-- ===== REST OF YOUR WEBSITE ===== -->
+<!-- (All sections are exactly the same as before) -->
 
 <section class="hero" id="home">
 <div class="container hero-grid">
@@ -1817,15 +1823,62 @@ footer{
 <!-- ======================================== JAVASCRIPT ======================================== -->
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 
-<!-- Google Translate Script -->
+<!-- Google Translate Manual Trigger -->
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <script>
+// Google Translate initialization (hidden)
 function googleTranslateElementInit() {
     new google.translate.TranslateElement({
         pageLanguage: 'en',
         includedLanguages: 'en,es,ar,ru,zh-CN,hi,fr,pt,de,ja,tr,it,ko,nl,pl,uk,id,th,el,he',
         layout: google.translate.TranslateElement.InlineLayout.SIMPLE
     }, 'google_translate_element');
+    // Hide the Google Translate widget
+    var gtElement = document.getElementById('google_translate_element');
+    if (gtElement) {
+        gtElement.style.display = 'none';
+    }
+}
+
+// Function to change language manually
+function changeLanguage(langCode) {
+    var select = document.querySelector('.goog-te-combo');
+    if (select) {
+        select.value = langCode;
+        select.dispatchEvent(new Event('change'));
+    } else {
+        // If not loaded, wait and try again
+        setTimeout(function() {
+            changeLanguage(langCode);
+        }, 1000);
+    }
+    // Update label
+    var labelMap = {
+        'en': 'Translate / ترجمة / Перевод / 翻译',
+        'es': 'Traducir / ترجمة / Перевод / 翻译',
+        'ar': 'ترجمة / Translate / Перевод / 翻译',
+        'ru': 'Перевести / Translate / ترجمة / 翻译',
+        'zh-CN': '翻译 / Translate / ترجمة / Перевод',
+        'hi': 'अनुवाद करें / Translate / ترجمة / Перевод',
+        'fr': 'Traduire / Translate / ترجمة / Перевод',
+        'pt': 'Traduzir / Translate / ترجمة / Перевод',
+        'de': 'Übersetzen / Translate / ترجمة / Перевод',
+        'ja': '翻訳 / Translate / ترجمة / Перевод',
+        'tr': 'Çevir / Translate / ترجمة / Перевод',
+        'it': 'Traduci / Translate / ترجمة / Перевод',
+        'ko': '번역 / Translate / ترجمة / Перевод',
+        'nl': 'Vertalen / Translate / ترجمة / Перевод',
+        'pl': 'Tłumacz / Translate / ترجمة / Перевод',
+        'uk': 'Перекласти / Translate / ترجمة / 翻译',
+        'id': 'Terjemahkan / Translate / ترجمة / Перевод',
+        'th': 'แปล / Translate / ترجمة / Перевод',
+        'el': 'Μετάφραση / Translate / ترجمة / Перевод',
+        'he': 'תרגם / Translate / ترجمة / Перевод'
+    };
+    var labelText = document.getElementById('translateLabelText');
+    if (labelText) {
+        labelText.textContent = labelMap[langCode] || 'Translate / ترجمة / Перевод / 翻译';
+    }
 }
 
 // ============================================
